@@ -12,9 +12,39 @@ fetch(url, options)
 .then(response => {
     response.json()
     .then(dados => {
-        console.log(dados);
-        const usuarios = dados.data;
-        console.log(usuarios);
+        console.log(dados, "Aqui é Dados");
+        const usuarios = dados.data; // Array com todos os usuários e seus atributos!
+        console.log(usuarios, "Aqui é o Arrray usuários!");
+
+        //EXIBIR OS USUÁRIOS NO DOM
+        for(i=0; i<usuarios.length; i++){
+            // console.log(usuarios[i])
+
+            //Exibindo o avatar em uma img
+            let imagemUsuario = document.createElement('img');
+            imagemUsuario.setAttribute('src', usuarios[i].avatar);
+            document.getElementById('divTodosUsuarios').append(imagemUsuario);
+
+            //Exibindo Nome e Sobrenome em um H3
+            let nomeUsuario = document.createElement('h3');
+            nomeUsuario.innerText = `${usuarios[i].first_name} ${usuarios[i].last_name}`;
+            document.getElementById('divTodosUsuarios').append(nomeUsuario);
+
+            //Exibindo o Email em um p
+            let emailUsuario = document.createElement('p');
+            emailUsuario.innerText = usuarios[i].email;
+            document.getElementById('divTodosUsuarios').append(emailUsuario);
+
+
+
+        }
+
+
+
     })
 })
-.catch()
+.catch(err => {
+    console.log(err, "Erro!")
+})
+
+
